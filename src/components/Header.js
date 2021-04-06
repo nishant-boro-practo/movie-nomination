@@ -5,13 +5,31 @@ import React from "react";
 class Header extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      active: false,
+    };
   }
 
   render() {
     return (
       <div class="topnav">
-        <a onClick={() => this.props.history.push("/")}>Home</a>
-        <a onClick={() => this.props.history.push("/my-nominations")}>
+        <a
+          className={!this.state.active ? "active" : ""}
+          onClick={() => {
+            this.setState({ active: !this.state.active });
+            this.props.history.push("/");
+          }}
+        >
+          Home
+        </a>
+        <a
+          className={this.state.active ? "active" : ""}
+          onClick={() => {
+            this.setState({ active: !this.state.active });
+            this.props.history.push("/my-nominations");
+          }}
+        >
           My Nominations
         </a>
       </div>
